@@ -1,0 +1,59 @@
+# Hsuan Hsuan
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        # if q and p:
+        #     if q.val != p.val:
+        #         return False
+        #     return self.isSameTree(q.left, p.left) and self.isSameTree(q.right, p.right)
+        # if not q and not p:
+        #     return True
+        # return False
+
+        #BFS
+        # q1 = deque()
+        # q2 = deque()
+        # q1.append(p)
+        # q2.append(q)
+
+        # while q1 and q2:
+        #     for _ in range(len(q1)):
+        #         node1 = q1.popleft()
+        #         node2 = q2.popleft()
+        #         if not node1 and not node2:
+        #             continue
+        #         if not node1 or not node2 or (node1.val != node2.val):
+        #             return False
+        #         q1.append(node1.left)
+        #         q1.append(node1.right)
+        #         q2.append(node2.left)
+        #         q2.append(node2.right)
+
+        # return True
+
+        #DFS iteration
+        stack1 = [p]
+        stack2 = [q]
+        while stack1 and stack2:
+            node1 = stack1.pop()
+            node2 = stack2.pop()
+
+            if not node1 and not node2:
+                continue
+            if not node1 or not node2 or (node1.val != node2.val):
+                return False
+            stack1.append(node1.left)
+            stack1.append(node1.right)
+            stack2.append(node2.left)
+            stack2.append(node2.right)
+        return True
+
+    
+
